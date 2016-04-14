@@ -29,7 +29,7 @@
 #include "cancellation_flag.h"
 #include "waitable_event.h"
 #include "sys_info.h"
-//#include "base/third_party/dynamic_annotations/dynamic_annotations.h"
+// #include "base/third_party/dynamic_annotations/dynamic_annotations.h"
 #include "platform_thread.h"
 #include "thread_id_name_manager.h"
 #include "time_cef.h"
@@ -1205,6 +1205,7 @@ namespace base {
 		// static
 		TraceLog* TraceLog::GetInstance() {
 			return Singleton<TraceLog, LeakySingletonTraits<TraceLog> >::get();
+			// return Singleton<TraceLog, DefaultSingletonTraits<TraceLog> >::get();
 		}
 
 		TraceLog::TraceLog()
@@ -1231,10 +1232,10 @@ namespace base {
 			// ANNOTATE_BENIGN_RACE_SIZED(g_category_group_enabled,
 			//                            sizeof(g_category_group_enabled),
 			//                           "trace_event category enabled");
-			for (int i = 0; i < MAX_CATEGORY_GROUPS; ++i) {
-				/*ANNOTATE_BENIGN_RACE(&g_category_group_enabled[i],
-					"trace_event category enabled");*/
-			}
+			/*for (int i = 0; i < MAX_CATEGORY_GROUPS; ++i) {
+				ANNOTATE_BENIGN_RACE(&g_category_group_enabled[i],
+					"trace_event category enabled");
+			}*/
 #if defined(OS_NACL)  // NaCl shouldn't expose the process id.
 			SetProcessID(0);
 #else
